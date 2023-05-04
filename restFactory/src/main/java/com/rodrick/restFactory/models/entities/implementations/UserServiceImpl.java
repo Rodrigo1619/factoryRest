@@ -6,10 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.stereotype.Service;
 
 import com.rodrick.restFactory.models.dtos.LoginDTO;
+import com.rodrick.restFactory.models.dtos.RegisterDTO;
 import com.rodrick.restFactory.models.entities.User;
 import com.rodrick.restFactory.services.UserService;
 
@@ -31,6 +34,18 @@ public class UserServiceImpl implements UserService {
 			e.printStackTrace();
 		}
 	}
+	@Override
+	public void register(RegisterDTO registerinfo) {
+		User newUser = new User(
+				registerinfo.getUsername(),
+				registerinfo.getEmail(),
+				"",
+				registerinfo.getPassword() + "encriptado"
+				);
+		users = Stream.concat(users.stream(), Stream.of(newUser))
+				.collect(Collectors.toList());
+		
+	}
 
 	@Override
 	public void login(LoginDTO info) {
@@ -50,5 +65,7 @@ public class UserServiceImpl implements UserService {
 				.findAny() //devuelve cualquiera que encuentre
 				.orElse(null); //sino devuelve nulo
 	}
+
+	
 
 }
