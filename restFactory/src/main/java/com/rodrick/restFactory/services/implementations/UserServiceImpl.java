@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 				e.printStackTrace();
 			}
 		}
-		@Override
+	/*	@Override
 		public void register(RegisterDTO registerinfo) {
 			User newUser = new User(
 					registerinfo.getUsername(),
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService{
 			users = Stream.concat(users.stream(), Stream.of(newUser))
 					.collect(Collectors.toList());
 			
-		}
+		}*/
 
 		@Override
 		public void login(LoginDTO info) {
@@ -63,6 +63,12 @@ public class UserServiceImpl implements UserService{
 					.filter(u-> (u.getUsername().equals(identifier) || u.getEmail().equals(identifier)))
 					.findAny() //devuelve cualquiera que encuentre
 					.orElse(null); //sino devuelve nulo
+		}
+
+		@Override
+		public void register(RegisterDTO registerinfo) {
+			// TODO Auto-generated method stub
+			
 		}
 
 		
